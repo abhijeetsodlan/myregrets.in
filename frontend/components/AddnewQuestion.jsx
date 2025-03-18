@@ -73,9 +73,9 @@ export default function CreateQuestionModal({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center z-50 justify-center bg-black bg-opacity-50">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md text-white">
-        <h2 className="text-2xl font-bold mb-4">Create a New Question</h2>
+        <h2 className="text-2xl font-bold mb-4">Submit a new Regret</h2>
         
         {/* Show loading message if categories are still loading */}
         {categoriesLoading ? (
@@ -118,7 +118,7 @@ export default function CreateQuestionModal({ onClose }) {
                 onChange={(e) => setIsAnonymous(e.target.checked)}
                 className="w-4 h-4"
               />
-              <label htmlFor="anonymous" className="text-sm">Post Anonymously</label>
+              <label htmlFor="anonymous" className="text-sm">Submit Anonymously</label>
             </div>
 
             {/* Error Message */}

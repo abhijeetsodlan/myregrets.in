@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import AuthSuccess from "../components/AuthSuccess";
 import Login from "../components/LoginPage";
 import Footer from "../components/Footer";
-import "./App.css";
+
 
 // Layout component for pages with Navbar and Footer
 const DefaultLayout = ({ children }) => (
@@ -46,7 +46,7 @@ function App() {
       <div className="min-h-screen bg-gray-900 text-white flex flex-col">
         <Routes>
           {/* Public Routes (accessible to everyone) */}
-          <Route path="/" element={<GetStarted />} />
+          <Route path="/" element={<><GetStarted /><Footer /></>} />
 
           {/* Auth Success Route (no Navbar/Footer, accessible to all) */}
           <Route path="/questions/auth-success" element={<AuthSuccess />} />

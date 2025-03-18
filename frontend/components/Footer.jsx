@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ABHIJEET_IMAGE_URL =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_rinx1KYGFy18wkY9gJ5B8GBjg5rv8WaBNg&s"; // Replace with your actual image
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_rinx1KYGFy18wkY9gJ5B8GBjg5rv8WaBNg&s"; 
 
 const Footer = () => {
+
   return (
     <footer className="w-full bg-gray-100 text-gray-700 py-12 border-t border-gray-300">
       <div className="max-w-7xl mx-auto px-6">
@@ -18,7 +19,8 @@ const Footer = () => {
           {/* About Section */}
           <div className="sm:col-span-2">
             <p className="text-sm text-gray-600 max-w-md">
-              Share your regrets, read others' stories, and see who relates—anonymously or openly.
+              Share your regrets, read others' stories, and see who
+              relates—anonymously or openly.
             </p>
           </div>
 
@@ -27,7 +29,10 @@ const Footer = () => {
             <h3 className="text-gray-800 font-semibold mb-3">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/support" className="hover:text-red-600">
+                <Link
+                  to="/support"
+                  className="hover:text-red-600 transition-all duration-200"
+                >
                   Support
                 </Link>
               </li>
@@ -39,12 +44,18 @@ const Footer = () => {
             <h3 className="text-gray-800 font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/terms-of-service" className="hover:text-red-600">
+                <Link
+                  to="/terms-of-service"
+                  className="hover:text-red-600 transition-all duration-200"
+                >
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/privacy-policy" className="hover:text-red-600">
+                <Link
+                  to="/privacy-policy"
+                  className="hover:text-red-600 transition-all duration-200"
+                >
                   Privacy Policy
                 </Link>
               </li>
@@ -57,16 +68,24 @@ const Footer = () => {
           <p className="text-xs text-gray-500 text-center sm:text-left">
             © {new Date().getFullYear()} Regrets.in - All rights reserved.
           </p>
-          <div className="flex items-center mt-4 sm:mt-0">
+          <a
+            href="https://abhijeet.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center mt-4 sm:mt-0 cursor-pointer hover:opacity-80 transition-all duration-200"
+          >
             <img
               src={ABHIJEET_IMAGE_URL}
               alt="Abhijeet Sodlan"
               className="w-10 h-10 rounded-full border-2 border-red-600 object-cover"
             />
             <p className="text-xs ml-3 text-gray-600">
-              Made by <span className="font-semibold text-gray-800">Abhijeet Sodlan</span>
+              Made by{" "}
+              <span className="font-semibold text-gray-800">
+                Abhijeet Sodlan
+              </span>
             </p>
-          </div>
+          </a>
         </div>
       </div>
     </footer>
