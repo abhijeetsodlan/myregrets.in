@@ -1,21 +1,20 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  FaRegComment,
-  FaRegBookmark,
-  FaPlus,
-  FaRegHeart,
-  FaHeart,
-  FaShareAlt
-} from "react-icons/fa";
+import { FaRegBookmark, FaShareAlt } from "react-icons/fa";
 import {
   IoSadOutline,
   IoHappyOutline,
   IoHelpCircleOutline,
 } from "react-icons/io5";
 import CheckAuthModal from "../../components/CheckAuth";
-import SharePopup from "../../components/SharePopUp"; // Renamed to match your import
+import SharePopup from "../../components/SharePopUp";
+import SaveButton from "../../components/SaveButton";
+import CommentButton from "../../components/CommentButton";
+import HappenedToMeButton from "../../components/HappenedToMeButton";
+import LikeButton from "../../components/LikeButton";
+import CategoriesBar from "../../components/CategoriesBar";
+import AddRegretButton from "../../components/AddRegretButton";
 
 // Constants
 const API_BASE_URL = "http://127.0.0.1:8000/api";
@@ -111,58 +110,25 @@ const QuestionsPage = () => {
         );
       } catch (error) {
         console.error("Error liking question:", error);
-        // Optionally revert the like if API fails
       }
     },
     [getApiConfig]
   );
 
-  // Render components
-  const CategoryButton = ({ id, name, isSelected }) => (
-    <button
-      onClick={() => handleCategoryClick(id)}
-      className={`px-5 py-3 min-h-[40px] rounded-full font-semibold transition-all duration-300 whitespace-nowrap ${
-        isSelected
-          ? "bg-red-400 text-white shadow-lg"
-          : "bg-gray-700 hover:bg-red-300 text-gray-200"
-      }`}
-    >
-      {name}
-    </button>
-  );
+  const handleAddRegret = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col items-center py-6">
-      <button
-        className="mb-4 bg-red-400 px-6 py-3 rounded-lg shadow-md hover:bg-red-500 transition font-semibold text-white"
-        onClick={() => setIsModalOpen(true)}
-      >
-        + Add Regret
-      </button>
-      <button
-        className="fixed bottom-6 right-6 bg-red-400 p-4 rounded-full shadow-xl hover:bg-red-500 transition"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <FaPlus size={24} className="text-white" />
-      </button>
+      <AddRegretButton onClick={handleAddRegret} />
+      <AddRegretButton onClick={handleAddRegret} variant="fixed" />
 
-      <div className="w-full max-w-3xl px-4 mb-4">
-        <div className="flex space-x-2 overflow-x-auto pb-4 border-b border-gray-600 scrollbar-hide">
-          <CategoryButton
-            id="All"
-            name="All"
-            isSelected={selectedCategory === "All"}
-          />
-          {categories.map((category) => (
-            <CategoryButton
-              key={category.id}
-              id={category.id}
-              name={category.name}
-              isSelected={selectedCategory === category.id}
-            />
-          ))}
-        </div>
-      </div>
+      <CategoriesBar
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryClick={handleCategoryClick}
+      />
 
       <CheckAuthModal
         isOpen={isModalOpen}
@@ -225,41 +191,23 @@ const QuestionsPage = () => {
                 {question.title}
               </p>
 
-              <div className="flex justify-between items-center mt-4 text-gray-400">
+              <div className="flex-row justify-between items-center mt-4 text-gray-400">
+                <HappenedToMeButton />
                 <div className="flex items-center space-x-2 sm:space-x-4 w-full">
-                  <button
-                    onClick={(e) => handleLike(e, question.id)}
-                    className="flex items-center border text-white px-2 py-1 sm:px-3 sm:py-2 rounded-lg transition hover:bg-gray-800"
-                  >
-                    {likes[question.id]?.liked ? (
-                      <FaHeart size={16} className="mr-1 text-red-500" />
-                    ) : (
-                      <FaRegHeart size={16} className="mr-1" />
-                    )}
-                    <span className="text-sm sm:text-base">
-                      {likes[question.id]?.count || 0}
-                    </span>
-                  </button>
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`/regrets/${question.id}`);
-                    }}
-                    className="flex items-center border px-2 py-1 sm:px-3 sm:py-2 rounded-lg transition hover:bg-gray-800"
-                  >
-                    <FaRegComment size={16} className="mr-1 text-white" />
-                  </button>
-
-                  {/* Replace Share Button with SharePopup */}
+                  <LikeButton
+                    questionId={question.id}
+                    likes={likes}
+                    handleLike={handleLike}
+                  />
+                  <CommentButton
+                    questionId={question.id}
+                    onNavigate={navigate}
+                  />
                   <SharePopup
                     regretId={question.id}
                     regretTitle={question.title}
                   />
-
-                  <button className="flex items-center border px-2 py-1 sm:px-3 sm:py-2 rounded-lg transition hover:bg-gray-800">
-                    <FaRegBookmark size={16} className="mr-1 text-white" />
-                  </button>
+                  <SaveButton questionId={question.id} />
                 </div>
               </div>
             </div>
