@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\LikesController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\SavePostController;
+use App\Http\Controllers\Api\MyProfileController;
 use App\Http\Controllers\Api\SocioliteController;
 
 Route::get('/user', function (Request $request) {
@@ -34,3 +36,6 @@ Route::get('/categories', [CategoryController::class, 'index']);
 // Toggle like/unlike on a question
 Route::middleware('auth:sanctum')->post('/questions/{question_id}/like', [LikesController::class, 'toggleLike']);
 Route::middleware('auth:sanctum')->post('/logout', [SocioliteController::class, 'logout']);
+
+Route::post('savepost',[SavePostController::class,'index']);
+Route::post('myprofile',[MyProfileController::class,'index']);

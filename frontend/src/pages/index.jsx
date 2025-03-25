@@ -119,6 +119,8 @@ const QuestionsPage = () => {
     setIsModalOpen(true);
   };
 
+  
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col items-center py-6">
       <AddRegretButton onClick={handleAddRegret} />
